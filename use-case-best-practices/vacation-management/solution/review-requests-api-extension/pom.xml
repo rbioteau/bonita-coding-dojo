@@ -1,39 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.bonitasoft.web</groupId>
-    <artifactId>review-requests-api-extension</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <groupId>com.company.rest.api</groupId>
+    <artifactId>reviewRequestRestAPI</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    
+    <name>Review Request API Extension</name>
+    <description>Review Request API Extension</description>
+    
     <properties>
-        <bonita.version>7.1.2</bonita.version>
-        <groovy.version>1.8.6-01</groovy.version>
+        <bonita.version>7.2.0</bonita.version>
+        <groovy.version>2.4.3-01</groovy.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <repositories>
-        <repository>
-            <id>maven-restlet</id>
-            <name>Public online Restlet repository</name>
-            <url>http://maven.restlet.com</url>
-        </repository>
-    </repositories>
+
     <dependencies>
-
-        <dependency>
-            <groupId>org.bonitasoft.bdm</groupId>
-            <artifactId>bdm-dao</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/bdm-dao.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>org.bonitasoft.bdm</groupId>
-            <artifactId>bdm-model</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/bdm-model.jar</systemPath>
-        </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
@@ -47,13 +29,12 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.bonitasoft.console</groupId>
-            <artifactId>console-server</artifactId>
+            <groupId>org.bonitasoft.web</groupId>
+            <artifactId>bonita-web-extensions</artifactId>
             <version>[${bonita.version},)</version>
-            <classifier>classes</classifier>
             <scope>provided</scope>
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>org.bonitasoft.engine</groupId>
             <artifactId>bonita-common</artifactId>
             <version>[${bonita.version},)</version>
@@ -62,27 +43,45 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-            <version>1.8.6</version>
+            <version>2.4.4</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.4</version>
+            <version>2.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.2.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>bizdata</groupId>
+            <artifactId>bdm-client</artifactId>
+            <version>1.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>bizdata</groupId>
+            <artifactId>bdm-dao</artifactId>
+            <version>1.0.0</version>
             <scope>provided</scope>
         </dependency>
 
         <!-- test -->
         <dependency>
-            <groupId>org.restlet.jse</groupId>
-            <artifactId>org.restlet</artifactId>
-            <version>2.1.7</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.spockframework</groupId>
             <artifactId>spock-core</artifactId>
-            <version>0.7-groovy-1.8</version>
+            <version>1.0-groovy-2.4</version>
             <scope>test</scope>
         </dependency>
         <dependency> <!-- enables mocking of classes (in addition to interfaces) -->
@@ -95,6 +94,12 @@
             <groupId>org.objenesis</groupId>
             <artifactId>objenesis</artifactId>
             <version>1.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.6.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -146,6 +151,7 @@
                         </goals>
                         <inherited>false</inherited>
                         <configuration>
+                            <finalName>${project.build.finalName}-${project.version}</finalName>
                             <ignoreDirFormatExtensions>true</ignoreDirFormatExtensions>
                             <appendAssemblyId>false</appendAssemblyId>
                             <descriptors>
