@@ -52,13 +52,13 @@ class Index implements RestApiController {
 		def dao = apiClient.getDAO(VacationRequestDAO.class);
 		def result = searchResult.getResult().collect { task ->
 			def taskContext = apiClient.processAPI.getUserTaskExecutionContext(task.getId());
-			SimpleBusinessDataReference reference = taskContext.get("vacationRequest_ref") as SimpleBusinessDataReference;
+			SimpleBusinessDataReference reference = taskContext["vacationRequest_ref"] as SimpleBusinessDataReference;
 			return [
 				task           : task,
 				vacationRequest: dao.findByPersistenceId(reference.getStorageId())
 			]
 		}
-		
+
 		return buildPagedResponse(responseBuilder, new JsonBuilder(result).toPrettyString(),p as int, c as int, searchResult.count)
 	}
 
